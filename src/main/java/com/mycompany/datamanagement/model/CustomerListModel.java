@@ -15,4 +15,7 @@ public class CustomerListModel {
         }
     }
     
+    public ArrayList<CustomerModel> getCustomerList() {
+        return new ArrayList<>(customerList); // devuelve una COPIA, no la referencia original
+    }
 }

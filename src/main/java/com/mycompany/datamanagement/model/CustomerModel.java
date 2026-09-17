@@ -21,7 +21,7 @@ public class CustomerModel {
     public CustomerModel() {
     }
 
-    public CustomerModel(int index, int customerId, String firstName, String lastName,
+    public CustomerModel(int customerId, String firstName, String lastName,
                     String company, String city, String country,
                     String phone1, String phone2, String email,
                     String subscriptionDate, String website) {
