@@ -1,9 +1,11 @@
 package com.mycompany.datamanagement.model;
 
 /**
+ * Represents a customer with their personal and contact information.
  *
  * @author Hansel
  */
+
 public class CustomerModel {
 
     private String customerId;
@@ -18,9 +20,28 @@ public class CustomerModel {
     private String subscriptionDate;
     private String website;
 
+    
+    /**
+     * Creates an empty Customer with no data set.
+     */
     public CustomerModel() {
     }
-
+    
+    /**
+     * Creates a Customer with all of their information already set.
+     *
+     * @param customerId the customer's unique identifier
+     * @param firstName the customer's first name
+     * @param lastName the customer's last name
+     * @param company the company the customer belongs to
+     * @param city the customer's city
+     * @param country the customer's country
+     * @param phone1 the customer's primary phone number
+     * @param phone2 the customer's secondary phone number
+     * @param email the customer's email address
+     * @param subscriptionDate the date the customer subscribed
+     * @param website the customer's website
+     */
     public CustomerModel(String customerId, String firstName, String lastName,
             String company, String city, String country,
             String phone1, String phone2, String email,
