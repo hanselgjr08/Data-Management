@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import com.mycompany.datamanagement.model.*;
 
 /**
- *
+ * Displays the list of registered customers in a table.
+ * The table is populated automatically when the window is created.
+ * 
  * @author Hansel
  */
 public class CustomerListView extends JFrame {
@@ -15,13 +17,22 @@ public class CustomerListView extends JFrame {
     private CustomerListModel customerListModel;
     private JTable table;
     private DefaultTableModel tableModel;
-
+    
+    /**
+     * Creates the customer list window linked to the given model,
+     * and immediately displays its current data.
+     *
+     * @param customerListModel the model containing the customers to display
+     */
     public CustomerListView(CustomerListModel customerListModel) {
         this.customerListModel = customerListModel;
         initComponents();
         listCustomers();
     }
-
+    
+    /**
+     * Builds and arranges the window's visual components (table and layout).
+     */
     private void initComponents() {
         setTitle("Customer List");
         setSize(800, 400);
@@ -39,11 +50,19 @@ public class CustomerListView extends JFrame {
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 
+    /**
+     * Retrieves the current customers from the model and shows them in the table.
+     */
     private void listCustomers() {
         ArrayList<CustomerModel> customers = customerListModel.getCustomerList();
         showCustomers(customers);
     }
-
+    
+    /**
+     * Clears the table and fills it with the given list of customers.
+     *
+     * @param customers the customers to display
+     */
     private void showCustomers(ArrayList<CustomerModel> customers) {
         tableModel.setRowCount(0);
         for (CustomerModel c : customers) {

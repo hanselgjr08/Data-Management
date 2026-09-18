@@ -5,20 +5,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Handles the logic for loading customers from a CSV file and adding
+ * them to the customer list model.
+ * 
  * @author Hansel
  */
 public class CustomerListControl {
-
     private CustomerListModel customerListModel;
+    
+    /**
+     * Creates a controller linked to the given customer list model.
+     *
+     * @param customerListModel the model where loaded customers will be stored
+     */
 
     public CustomerListControl(CustomerListModel customerListModel) {
         this.customerListModel = customerListModel;
     }
-
+    
+    /**
+     * Parses a list of CSV lines and creates a Customer for each record,
+     * adding it to the customer list. The first line is skipped, since it
+     * corresponds to the CSV header.
+     *
+     * @param lines the CSV lines to parse, including the header as the first element
+     */
     public void addCustomerFromCSV(ArrayList<String> lines) {
 
-        for (int i = 1; i < lines.size(); i++) { // empieza en 1, se salta el encabezado (índice 0)
+        for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
             String[] data = line.split(",");
 
@@ -44,6 +58,14 @@ public class CustomerListControl {
         }
     }
 
+    /**
+     * Reads a CSV file and loads its records as Customer objects into the model,
+     * Combines file reading (readLine) and parsing (addCustomerFromCSV) into a
+     * single operation.
+     *
+     * @param fileName the name of the CSV file (without extension), located in the inputfiles folder
+     * @throws IOException if the file cannot be read
+     */
     public void loadCustomerFromFile(String fileName) throws IOException {
         ArrayList<String> lines = CSVFileManagerControl.readLine(fileName);
         addCustomerFromCSV(lines);

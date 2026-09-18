@@ -5,7 +5,9 @@ import com.mycompany.datamanagement.model.*;
 import com.mycompany.datamanagement.view.*;
 
 /**
- *
+ * Entry point of the application. Wires together the Model, View and
+ * Control layers and starts the main menu.
+ * 
  * @author Hansel
  */
 public class DataManagement {

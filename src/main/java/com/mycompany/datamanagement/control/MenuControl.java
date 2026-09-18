@@ -6,19 +6,31 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Handles the actions triggered from the main menu, such as loading
+ * customer data from a CSV file or opening the customer list view.
+ * 
  * @author Hansel
  */
 public class MenuControl {
 
     private CustomerListControl customerListControl;
     private CustomerListModel customerListModel;
-
+    
+    /**
+     * Creates a menu controller linked to the given customer controller and model.
+     *
+     * @param customerListControl the controller used to load customer data
+     * @param customerListModel the model that holds the customer data to display
+     */
     public MenuControl(CustomerListControl customerListControl, CustomerListModel customerListModel) {
         this.customerListControl = customerListControl;
         this.customerListModel = customerListModel;
     }
 
+    /**
+     * Loads the customers from the default CSV file and shows a confirmation
+     * or error message depending on the result.
+     */
     public void onLoadCSV() {
         try {
             customerListControl.loadCustomerFromFile("customers-1000");
@@ -27,7 +39,10 @@ public class MenuControl {
             JOptionPane.showMessageDialog(null, "Error loading file: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * Opens a new window showing the current list of customers.
+     */
     public void onListCustomers() {
         CustomerListView view = new CustomerListView(customerListModel);
         view.setVisible(true);
