@@ -5,8 +5,8 @@ package com.mycompany.datamanagement.model;
  * @author Hansel
  */
 public class CustomerModel {
-    
-    private int customerId;
+
+    private String customerId;
     private String firstName;
     private String lastName;
     private String company;
@@ -21,10 +21,10 @@ public class CustomerModel {
     public CustomerModel() {
     }
 
-    public CustomerModel(int customerId, String firstName, String lastName,
-                    String company, String city, String country,
-                    String phone1, String phone2, String email,
-                    String subscriptionDate, String website) {
+    public CustomerModel(String customerId, String firstName, String lastName,
+            String company, String city, String country,
+            String phone1, String phone2, String email,
+            String subscriptionDate, String website) {
 
         this.customerId = customerId;
         this.firstName = firstName;
@@ -39,11 +39,11 @@ public class CustomerModel {
         this.website = website;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -126,11 +126,11 @@ public class CustomerModel {
     public void setWebsite(String website) {
         this.website = website;
     }
-    
+
     public void setCustomerInfo(int customerId, String firstName, String lastName,
-                    String company, String city, String country,
-                    String phone1, String phone2, String email,
-                    String subscriptionDate, String website){
-        
+            String company, String city, String country,
+            String phone1, String phone2, String email,
+            String subscriptionDate, String website) {
+
     }
 }

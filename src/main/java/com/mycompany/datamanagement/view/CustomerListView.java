@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import com.mycompany.datamanagement.model.*;
+
 /**
  *
  * @author Hansel
@@ -14,17 +15,18 @@ public class CustomerListView extends JFrame {
     private CustomerListModel customerListModel;
     private JTable table;
     private DefaultTableModel tableModel;
-    private JButton listButton;
 
     public CustomerListView(CustomerListModel customerListModel) {
         this.customerListModel = customerListModel;
         initComponents();
+        listCustomers();
     }
 
     private void initComponents() {
         setTitle("Customer List");
         setSize(800, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         String[] columns = {
@@ -34,11 +36,7 @@ public class CustomerListView extends JFrame {
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
 
-        listButton = new JButton("List Customers");
-        listButton.addActionListener(e -> listCustomers());
-
         add(new JScrollPane(table), BorderLayout.CENTER);
-        add(listButton, BorderLayout.SOUTH);
     }
 
     private void listCustomers() {
