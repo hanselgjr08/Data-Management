@@ -70,5 +70,5 @@ public class CustomerListControl {
         ArrayList<String> lines = CSVFileManagerControl.readLine(fileName);
         addCustomerFromCSV(lines);
     }
-
+    
 }
