@@ -5,30 +5,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Handles the logic for loading customers from a CSV file and adding
- * them to the customer list model.
- * 
+ * Handles the logic for loading customers from a CSV file and adding them to
+ * the customer list model.
+ *
  * @author Hansel
  */
 public class CustomerListControl {
+
     private CustomerListModel customerListModel;
-    
+
     /**
      * Creates a controller linked to the given customer list model.
      *
      * @param customerListModel the model where loaded customers will be stored
      */
-
     public CustomerListControl(CustomerListModel customerListModel) {
         this.customerListModel = customerListModel;
     }
-    
+
     /**
-     * Parses a list of CSV lines and creates a Customer for each record,
-     * adding it to the customer list. The first line is skipped, since it
-     * corresponds to the CSV header.
+     * Parses a list of CSV lines and creates a Customer for each record, adding
+     * it to the customer list. The first line is skipped, since it corresponds
+     * to the CSV header.
      *
-     * @param lines the CSV lines to parse, including the header as the first element
+     * @param lines the CSV lines to parse, including the header as the first
+     * element
      */
     public void addCustomerFromCSV(ArrayList<String> lines) {
 
@@ -59,16 +60,31 @@ public class CustomerListControl {
     }
 
     /**
-     * Reads a CSV file and loads its records as Customer objects into the model,
-     * Combines file reading (readLine) and parsing (addCustomerFromCSV) into a
-     * single operation.
+     * Reads a CSV file and loads its records as Customer objects into the
+     * model, Combines file reading (readLine) and parsing (addCustomerFromCSV)
+     * into a single operation.
      *
-     * @param fileName the name of the CSV file (without extension), located in the inputfiles folder
+     * @param fileName the name of the CSV file (without extension), located in
+     * the inputfiles folder
      * @throws IOException if the file cannot be read
      */
     public void loadCustomerFromFile(String fileName) throws IOException {
         ArrayList<String> lines = CSVFileManagerControl.readLine(fileName);
         addCustomerFromCSV(lines);
     }
-    
+
+    /**
+     * Searches for customers matching both a name and a country, delegating the
+     * actual search logic to the model.
+     *
+     * @param name the first name to search for
+     * @param country the country to search for
+     * @return a list with the customers matching both criteria
+     */
+    public ArrayList<CustomerModel> search(String name, String country) {
+        ArrayList<CustomerModel> byName = customerListModel.searchByName(name);
+        ArrayList<CustomerModel> byCountry = customerListModel.searchByCountry(country);
+        return customerListModel.searchByNameAndCountry(byName, byCountry);
+    }
+
 }

@@ -41,10 +41,11 @@ public class MenuControl {
     }
     
     /**
-     * Opens a new window showing the current list of customers.
+     * Opens a new window showing the current list of customers,
+     * with the option to search by name and country.
      */
     public void onListCustomers() {
-        CustomerListView view = new CustomerListView(customerListModel);
+        CustomerListView view = new CustomerListView(customerListModel, customerListControl);
         view.setVisible(true);
     }
 }
