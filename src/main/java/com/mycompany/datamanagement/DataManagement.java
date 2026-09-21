@@ -13,6 +13,8 @@ import com.mycompany.datamanagement.view.*;
 public class DataManagement {
 
     public static void main(String[] args) {
+        //new CustomerFormView(null).setVisible(true);
+        
         CustomerListModel customerListModel = new CustomerListModel();
         CustomerListControl customerListControl = new CustomerListControl(customerListModel);
         MenuControl menuControl = new MenuControl(customerListControl, customerListModel);
