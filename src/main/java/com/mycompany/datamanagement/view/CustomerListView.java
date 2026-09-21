@@ -22,6 +22,7 @@ public class CustomerListView extends JFrame {
     private JTextField nameField;
     private JTextField countryField;
     private JButton searchButton;
+    private JButton createButton;
 
     /**
      * Creates the customer list window linked to the given model and controller,
@@ -46,6 +47,11 @@ public class CustomerListView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        
+        JPanel createPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10 ));
+        createButton = new JButton("Add Customer");
+        
+        createPanel.add(createButton);
 
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         nameField = new JTextField(10);
@@ -66,7 +72,8 @@ public class CustomerListView extends JFrame {
         };
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
-
+        
+        add(createPanel, BorderLayout.SOUTH);
         add(searchPanel, BorderLayout.NORTH);
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
