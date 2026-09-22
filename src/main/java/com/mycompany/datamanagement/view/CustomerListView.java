@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import com.mycompany.datamanagement.model.*;
 
-/**
+/** 
  * Displays the list of registered customers in a table, and lets the user
  * search for customers by name and country.
  *
@@ -48,25 +48,25 @@ public class CustomerListView extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
-        JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10 ));
+        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10 ));
         addButton = new JButton("Add Customer");
         
         addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
         
-        addPanel.add(addButton);
+        southPanel.add(addButton);
 
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         nameField = new JTextField(10);
         countryField = new JTextField(10);
         searchButton = new JButton("Search");
 
         searchButton.addActionListener(e -> search());
 
-        searchPanel.add(new JLabel("Name:"));
-        searchPanel.add(nameField);
-        searchPanel.add(new JLabel("Country:"));
-        searchPanel.add(countryField);
-        searchPanel.add(searchButton);
+        northPanel.add(new JLabel("Name:"));
+        northPanel.add(nameField);
+        northPanel.add(new JLabel("Country:"));
+        northPanel.add(countryField);
+        northPanel.add(searchButton);
 
         String[] columns = {
             "Customer ID", "First Name", "Last Name", "Company", "City",
@@ -75,8 +75,8 @@ public class CustomerListView extends JFrame {
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
         
-        add(addPanel, BorderLayout.SOUTH);
-        add(searchPanel, BorderLayout.NORTH);
+        add(southPanel, BorderLayout.SOUTH);
+        add(northPanel, BorderLayout.NORTH);
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 

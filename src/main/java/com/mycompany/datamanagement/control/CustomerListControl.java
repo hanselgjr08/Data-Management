@@ -89,8 +89,44 @@ public class CustomerListControl {
     }
     
     public void onAddCustomer(CustomerListView view){
-        CustomerFormView form = new CustomerFormView(view);
+        CustomerFormView form = new CustomerFormView(view, this);
         form.setVisible(true);
+    }
+    
+    public boolean notNull(ArrayList<String> data){
+        for (String field : data) {
+            if (field.isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean addCustomerFromView(ArrayList<String> data){
+        if (notNull(data)){
+            String customerId = data.get(0);
+            String firstName = data.get(1);
+            String lastName = data.get(2);
+            String company = data.get(3);
+            String city = data.get(4);
+            String country = data.get(5);
+            String phone1 = data.get(6);
+            String phone2 = data.get(7);
+            String email = data.get(8);
+            String subscriptionDate = data.get(9);
+            String website = data.get(10);
+            
+            CustomerModel customer = new CustomerModel(
+                    customerId, firstName, lastName, company,
+                    city, country, phone1, phone2, email,
+                    subscriptionDate, website
+            );
+
+            customerListModel.addCustomer(customer);
+            
+            return true;
+        }
+        return false;
     }
     
 }

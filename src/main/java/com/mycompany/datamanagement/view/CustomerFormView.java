@@ -3,6 +3,7 @@ package com.mycompany.datamanagement.view;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
+import com.mycompany.datamanagement.control.*;
 
 /**
  *
@@ -23,10 +24,12 @@ public class CustomerFormView extends JDialog {
     private JTextField emailField;
     private JTextField subscriptionDateField;
     private JTextField websiteField;
+    private CustomerListControl customerListControl;
 
-    public CustomerFormView(CustomerListView owner) {
+    public CustomerFormView(CustomerListView owner, CustomerListControl customerListControl) {
         super(owner, "New Customer", true);
         initComponents();
+        this.customerListControl = customerListControl;
     }
 
     private void initComponents() {
@@ -44,9 +47,9 @@ public class CustomerFormView extends JDialog {
         emailField = new JTextField(10);
         subscriptionDateField = new JTextField(10);
         websiteField = new JTextField(10);
-        
+
         textPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
-        
+
         textPanel.add(new JLabel("Customer ID: "));
         textPanel.add(customerIDField);
         textPanel.add(new JLabel("First Name: "));
@@ -76,10 +79,9 @@ public class CustomerFormView extends JDialog {
 
         cancelButton.addActionListener(e -> dispose());
 
-        // Agregado por Claude: por ahora solo imprime los datos para comprobar que se leen bien
         addButton.addActionListener(e -> {
-            ArrayList<String> data = getData();
-            System.out.println(data);
+            addCustomer();
+            dispose();
         });
 
         buttonPanel.add(addButton);
@@ -109,5 +111,10 @@ public class CustomerFormView extends JDialog {
         data.add(subscriptionDateField.getText().trim());
         data.add(websiteField.getText().trim());
         return data;
+    }
+
+    public void addCustomer() {
+        ArrayList<String> data = getData();
+        customerListControl.addCustomerFromView(data);
     }
 }
