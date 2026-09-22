@@ -6,6 +6,8 @@ import java.awt.*;
 import com.mycompany.datamanagement.control.*;
 
 /**
+ * Modal dialog that lets the user enter the data for a new customer and
+ * submit it for creation.
  *
  * @author Hansel
  */
@@ -26,12 +28,23 @@ public class CustomerFormView extends JDialog {
     private JTextField websiteField;
     private CustomerListControl customerListControl;
 
+    /**
+     * Creates the Add Customer form as a modal dialog owned by the given
+     * customer list window.
+     *
+     * @param owner the window that opens this form
+     * @param customerListControl the controller used to create the new customer
+     */
     public CustomerFormView(CustomerListView owner, CustomerListControl customerListControl) {
         super(owner, "New Customer", true);
         initComponents();
         this.customerListControl = customerListControl;
     }
 
+    /**
+     * Builds and arranges the form's visual components: one label and text
+     * field per customer attribute, and the Add and Cancel buttons.
+     */
     private void initComponents() {
         setLayout(new BorderLayout());
 
@@ -92,8 +105,12 @@ public class CustomerFormView extends JDialog {
         setLocationRelativeTo(getOwner());
     }
 
-    // Agregado por Claude: lee lo que el usuario escribió en cada campo, en el mismo
-    // orden del constructor de CustomerModel
+    /**
+     * Reads the text entered in each field, in the same order as
+     * CustomerModel's constructor parameters.
+     *
+     * @return the entered values, with leading and trailing spaces removed
+     */
     public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<>();
         data.add(customerIDField.getText().trim());
@@ -110,6 +127,11 @@ public class CustomerFormView extends JDialog {
         return data;
     }
 
+    /**
+     * Collects the form data and asks the controller to create the customer.
+     * Closes the form if it succeeds, or shows a message if some field was
+     * left empty.
+     */
     public void addCustomer() {
         ArrayList<String> data = getData();
         if (!customerListControl.addCustomerFromView(data)){

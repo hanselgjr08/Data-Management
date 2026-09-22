@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import com.mycompany.datamanagement.view.*;
 
 /**
- * Handles the logic for loading customers from a CSV file and adding them to
- * the customer list model.
+ * Handles the logic for loading customers from a CSV file, searching for
+ * customers in the list, and creating new customers from the Add Customer
+ * form.
  *
  * @author Hansel
  */
@@ -88,11 +89,23 @@ public class CustomerListControl {
         return customerListModel.search(byName, byCountry);
     }
     
+    /**
+     * Opens the Add Customer form as a modal dialog over the given customer
+     * list window.
+     *
+     * @param view the customer list window that owns the new form
+     */
     public void onAddCustomer(CustomerListView view){
         CustomerFormView form = new CustomerFormView(view, this);
         form.setVisible(true);
     }
     
+    /**
+     * Checks that none of the given values is empty.
+     *
+     * @param data the values to check, one per form field
+     * @return true if every value is non-empty, false if at least one is empty
+     */
     public boolean notNull(ArrayList<String> data){
         for (String field : data) {
             if (field.isEmpty()){
@@ -102,6 +115,15 @@ public class CustomerListControl {
         return true;
     }
     
+    /**
+     * Validates the data collected from the Add Customer form and, if valid,
+     * creates a new Customer and adds it to the customer list model.
+     *
+     * @param data the values entered in the form, in the same order as
+     * CustomerModel's constructor parameters
+     * @return true if the customer was created and added, false if validation
+     * failed
+     */
     public boolean addCustomerFromView(ArrayList<String> data){
         if (notNull(data)){
             String customerId = data.get(0);
