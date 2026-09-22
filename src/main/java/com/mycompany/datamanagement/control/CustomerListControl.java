@@ -3,6 +3,7 @@ package com.mycompany.datamanagement.control;
 import com.mycompany.datamanagement.model.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import com.mycompany.datamanagement.view.*;
 
 /**
  * Handles the logic for loading customers from a CSV file and adding them to
@@ -86,5 +87,10 @@ public class CustomerListControl {
         ArrayList<CustomerModel> byCountry = customerListModel.searchByCountry(country);
         return customerListModel.searchByNameAndCountry(byName, byCountry);
     }
-
+    
+    public void onAddCustomer(CustomerListView view){
+        CustomerFormView form = new CustomerFormView(view);
+        form.setVisible(true);
+    }
+    
 }
