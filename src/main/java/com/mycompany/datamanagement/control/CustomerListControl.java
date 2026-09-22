@@ -102,7 +102,7 @@ public class CustomerListControl {
         return true;
     }
     
-    public boolean addCustomerFromView(ArrayList<String> data){
+    public void addCustomerFromView(ArrayList<String> data){
         if (notNull(data)){
             String customerId = data.get(0);
             String firstName = data.get(1);
@@ -123,10 +123,7 @@ public class CustomerListControl {
             );
 
             customerListModel.addCustomer(customer);
-            
-            return true;
         }
-        return false;
     }
     
 }
