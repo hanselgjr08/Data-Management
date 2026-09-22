@@ -74,7 +74,7 @@ public class CustomerListModel {
      * @param byCountry the results from searchByCountry
      * @return a list with only the customers that satisfy both conditions
      */
-    public ArrayList<CustomerModel> searchByNameAndCountry(
+    public ArrayList<CustomerModel> search(
             ArrayList<CustomerModel> byName, 
             ArrayList<CustomerModel> byCountry) {
         

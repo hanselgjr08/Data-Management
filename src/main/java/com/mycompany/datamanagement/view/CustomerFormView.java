@@ -79,10 +79,7 @@ public class CustomerFormView extends JDialog {
 
         cancelButton.addActionListener(e -> dispose());
 
-        addButton.addActionListener(e -> {
-            addCustomer();
-            dispose();
-        });
+        addButton.addActionListener(e -> addCustomer());
 
         buttonPanel.add(addButton);
         buttonPanel.add(cancelButton);
@@ -115,6 +112,10 @@ public class CustomerFormView extends JDialog {
 
     public void addCustomer() {
         ArrayList<String> data = getData();
-        customerListControl.addCustomerFromView(data);
+        if (!customerListControl.addCustomerFromView(data)){
+            JOptionPane.showMessageDialog(this, "Please, fill out all fields", "Missing Fields", JOptionPane.WARNING_MESSAGE);
+        } else {
+            dispose();
+        }
     }
 }

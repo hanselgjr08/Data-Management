@@ -1,4 +1,4 @@
-package com.mycompany.datamanagement.control;
+    package com.mycompany.datamanagement.control;
 
 import com.mycompany.datamanagement.model.*;
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class CustomerListControl {
     public ArrayList<CustomerModel> search(String name, String country) {
         ArrayList<CustomerModel> byName = customerListModel.searchByName(name);
         ArrayList<CustomerModel> byCountry = customerListModel.searchByCountry(country);
-        return customerListModel.searchByNameAndCountry(byName, byCountry);
+        return customerListModel.search(byName, byCountry);
     }
     
     public void onAddCustomer(CustomerListView view){
@@ -102,7 +102,7 @@ public class CustomerListControl {
         return true;
     }
     
-    public void addCustomerFromView(ArrayList<String> data){
+    public boolean addCustomerFromView(ArrayList<String> data){
         if (notNull(data)){
             String customerId = data.get(0);
             String firstName = data.get(1);
@@ -123,7 +123,10 @@ public class CustomerListControl {
             );
 
             customerListModel.addCustomer(customer);
+            
+            return true;
         }
+        return false;
     }
     
 }

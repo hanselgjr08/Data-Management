@@ -148,10 +148,4 @@ public class CustomerModel {
         this.website = website;
     }
 
-    public void setCustomerInfo(int customerId, String firstName, String lastName,
-            String company, String city, String country,
-            String phone1, String phone2, String email,
-            String subscriptionDate, String website) {
-
-    }
 }
