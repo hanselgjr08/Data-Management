@@ -23,6 +23,7 @@ public class CustomerListView extends JFrame {
     private JTextField countryField;
     private JButton searchButton;
     private JButton addButton;
+    private JButton refreshButton;
 
     /**
      * Creates the customer list window linked to the given model and controller,
@@ -48,25 +49,35 @@ public class CustomerListView extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
+        JPanel northPanel = new JPanel(new BorderLayout());
+        
+        
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10 ));
         addButton = new JButton("Add Customer");
         
         addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
         
         southPanel.add(addButton);
+        
+        JPanel refreshPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        refreshButton = new JButton("Refresh");
+        refreshPanel.add(refreshButton);
 
-        JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         nameField = new JTextField(10);
         countryField = new JTextField(10);
         searchButton = new JButton("Search");
 
         searchButton.addActionListener(e -> search());
-
-        northPanel.add(new JLabel("Name:"));
-        northPanel.add(nameField);
-        northPanel.add(new JLabel("Country:"));
-        northPanel.add(countryField);
-        northPanel.add(searchButton);
+        
+        searchPanel.add(new JLabel("Name:"));
+        searchPanel.add(nameField);
+        searchPanel.add(new JLabel("Country:"));
+        searchPanel.add(countryField);
+        searchPanel.add(searchButton);
+        
+        northPanel.add(searchPanel, BorderLayout.CENTER);
+        northPanel.add(refreshPanel, BorderLayout.EAST);
 
         String[] columns = {
             "Customer ID", "First Name", "Last Name", "Company", "City",
