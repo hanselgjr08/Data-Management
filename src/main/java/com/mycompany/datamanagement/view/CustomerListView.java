@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import com.mycompany.datamanagement.model.*;
 
-/** 
+/**
  * Displays the list of registered customers in a table, and lets the user
  * search for customers by name and country.
  *
@@ -28,8 +28,8 @@ public class CustomerListView extends JFrame {
     private JButton deleteButton;
 
     /**
-     * Creates the customer list window linked to the given model and controller,
-     * and immediately displays its current data.
+     * Creates the customer list window linked to the given model and
+     * controller, and immediately displays its current data.
      *
      * @param customerListModel the model containing the customers to display
      * @param customerListControl the controller used to perform searches
@@ -42,8 +42,8 @@ public class CustomerListView extends JFrame {
     }
 
     /**
-     * Builds and arranges the window's visual components: the search panel,
-     * the Add Customer and Refresh buttons, and the customer table.
+     * Builds and arranges the window's visual components: the search panel, the
+     * Add Customer and Refresh buttons, and the customer table.
      */
     private void initComponents() {
         setTitle("Customer List");
@@ -77,15 +77,15 @@ public class CustomerListView extends JFrame {
         northPanel.add(searchPanel, BorderLayout.CENTER);
         northPanel.add(refreshPanel, BorderLayout.EAST);
         add(northPanel, BorderLayout.NORTH);
-        
+
         // new southPanel _=_==_=_=_=_=_=_=_=__=_=_==_=__=_=
         JPanel southPanel = new JPanel(new BorderLayout());
-        
+
         JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         addButton = new JButton("Add Customer");
         addPanel.add(addButton);
         addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
-        
+
         JPanel recordActionsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
         updateButton = new JButton("Update");
         deleteButton = new JButton("Delete");
@@ -93,35 +93,33 @@ public class CustomerListView extends JFrame {
         recordActionsPanel.add(deleteButton);
         updateButton.setEnabled(false);
         deleteButton.setEnabled(false);
-        
+
+        updateButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            CustomerModel selected = customerListModel.getCustomerList().get(row);
+            new UpdateFormView(this, customerListControl, selected).setVisible(true);
+        });
+
         southPanel.add(addPanel, BorderLayout.CENTER);
         southPanel.add(recordActionsPanel, BorderLayout.EAST);
         add(southPanel, BorderLayout.SOUTH);
-        
-        /* southPanel =========================================================
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        addButton = new JButton("Add Customer");
-        addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
-        southPanel.add(addButton);
-        add(southPanel, BorderLayout.SOUTH);
-        */
-        // tabla central
+
         String[] columns = {
             "Customer ID", "First Name", "Last Name", "Company", "City",
             "Country", "Phone 1", "Phone 2", "Email", "Subscription Date", "Website"
         };
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
-        
+
         table.getSelectionModel().addListSelectionListener(e -> {
-        if (e.getValueIsAdjusting()) {
-            return;
-        }
-        boolean hasSelection = table.getSelectedRow() != -1;
-        updateButton.setEnabled(hasSelection);
-        deleteButton.setEnabled(hasSelection);
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+            boolean hasSelection = table.getSelectedRow() != -1;
+            updateButton.setEnabled(hasSelection);
+            deleteButton.setEnabled(hasSelection);
         });
-        
+
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 
@@ -150,7 +148,7 @@ public class CustomerListView extends JFrame {
             tableModel.addRow(row);
         }
     }
-    
+
     /**
      * Reads the name and country entered by the user, searches for matching
      * customers through the controller, and displays the results in the table.

@@ -75,9 +75,9 @@ public class CustomerListModel {
      * @return a list with only the customers that satisfy both conditions
      */
     public ArrayList<CustomerModel> search(
-            ArrayList<CustomerModel> byName, 
+            ArrayList<CustomerModel> byName,
             ArrayList<CustomerModel> byCountry) {
-        
+
         ArrayList<CustomerModel> coincidences = new ArrayList<>();
         for (CustomerModel c : byName) {
             if (byCountry.contains(c)) {
@@ -85,5 +85,20 @@ public class CustomerListModel {
             }
         }
         return coincidences;
+    }
+
+    /**
+     * Finds the customer with the given ID.
+     *
+     * @param customerId the ID to search for
+     * @return the matching customer, or null if none is found
+     */
+    public CustomerModel findById(String customerId) {
+        for (CustomerModel customer : customerList) {
+            if (customer.getCustomerId().equals(customerId)) {
+                return customer;
+            }
+        }
+        return null;
     }
 }

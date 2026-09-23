@@ -1,4 +1,4 @@
-    package com.mycompany.datamanagement.control;
+package com.mycompany.datamanagement.control;
 
 import com.mycompany.datamanagement.model.*;
 import java.io.IOException;
@@ -7,8 +7,7 @@ import com.mycompany.datamanagement.view.*;
 
 /**
  * Handles the logic for loading customers from a CSV file, searching for
- * customers in the list, and creating new customers from the Add Customer
- * form.
+ * customers in the list, and creating new customers from the Add Customer form.
  *
  * @author Hansel
  */
@@ -88,33 +87,33 @@ public class CustomerListControl {
         ArrayList<CustomerModel> byCountry = customerListModel.searchByCountry(country);
         return customerListModel.search(byName, byCountry);
     }
-    
+
     /**
      * Opens the Add Customer form as a modal dialog over the given customer
      * list window.
      *
      * @param view the customer list window that owns the new form
      */
-    public void onAddCustomer(CustomerListView view){
+    public void onAddCustomer(CustomerListView view) {
         CustomerFormView form = new CustomerFormView(view, this);
         form.setVisible(true);
     }
-    
+
     /**
      * Checks that none of the given values is empty.
      *
      * @param data the values to check, one per form field
      * @return true if every value is non-empty, false if at least one is empty
      */
-    public boolean notNull(ArrayList<String> data){
+    public boolean notNull(ArrayList<String> data) {
         for (String field : data) {
-            if (field.isEmpty()){
+            if (field.isEmpty()) {
                 return false;
             }
         }
         return true;
     }
-    
+
     /**
      * Validates the data collected from the Add Customer form and, if valid,
      * creates a new Customer and adds it to the customer list model.
@@ -124,8 +123,8 @@ public class CustomerListControl {
      * @return true if the customer was created and added, false if validation
      * failed
      */
-    public boolean addCustomerFromView(ArrayList<String> data){
-        if (notNull(data)){
+    public boolean addCustomerFromView(ArrayList<String> data) {
+        if (notNull(data)) {
             String customerId = data.get(0);
             String firstName = data.get(1);
             String lastName = data.get(2);
@@ -137,7 +136,7 @@ public class CustomerListControl {
             String email = data.get(8);
             String subscriptionDate = data.get(9);
             String website = data.get(10);
-            
+
             CustomerModel customer = new CustomerModel(
                     customerId, firstName, lastName, company,
                     city, country, phone1, phone2, email,
@@ -145,10 +144,40 @@ public class CustomerListControl {
             );
 
             customerListModel.addCustomer(customer);
-            
+
             return true;
         }
         return false;
     }
-    
+
+    /**
+     * Validates the data collected from the Update Customer form and, if valid,
+     * updates the matching customer's data.
+     *
+     * @param data the values entered in the form, in the same order as
+     * CustomerModel's constructor parameters
+     * @return true if the customer was found and updated, false if validation
+     * failed
+     */
+    public boolean updateCustomerFromView(ArrayList<String> data) {
+        if (!notNull(data)) {
+            return false;
+        }
+
+        CustomerModel customer = customerListModel.findById(data.get(0));
+
+        customer.setFirstName(data.get(1));
+        customer.setLastName(data.get(2));
+        customer.setCompany(data.get(3));
+        customer.setCity(data.get(4));
+        customer.setCountry(data.get(5));
+        customer.setPhone1(data.get(6));
+        customer.setPhone2(data.get(7));
+        customer.setEmail(data.get(8));
+        customer.setSubscriptionDate(data.get(9));
+        customer.setWebsite(data.get(10));
+
+        return true;
+    }
+
 }
