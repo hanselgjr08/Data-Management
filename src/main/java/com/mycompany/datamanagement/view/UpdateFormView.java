@@ -7,6 +7,8 @@ import com.mycompany.datamanagement.control.*;
 import com.mycompany.datamanagement.model.*;
 
 /**
+ * Modal dialog that lets the user edit an existing customer's data and
+ * submit the changes.
  *
  * @author Hansel
  */
@@ -28,6 +30,14 @@ public class UpdateFormView extends JDialog {
     private JButton updateButton;
     private JButton cancelButton;
 
+    /**
+    * Creates the Update Customer form as a modal dialog owned by the given
+    * customer list window, preloaded with the given customer's data.
+    *
+    * @param owner the window that opens this form
+    * @param customerListControl the controller used to update the customer
+    * @param customer the customer whose data will be edited
+    */
     public UpdateFormView(CustomerListView owner, CustomerListControl customerListControl, CustomerModel customer) {
         super(owner, "Update Customer", true);
         this.customerListControl = customerListControl;
@@ -35,6 +45,11 @@ public class UpdateFormView extends JDialog {
         initComponents();
     }
 
+    /**
+    * Builds and arranges the form's visual components: one label and text
+    * field per customer attribute preloaded with the customer's current
+    * data, the Customer ID field disabled, and the Update and Cancel buttons.
+    */
     private void initComponents() {
         setLayout(new BorderLayout());
 

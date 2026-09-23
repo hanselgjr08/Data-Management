@@ -7,7 +7,8 @@ import com.mycompany.datamanagement.view.*;
 
 /**
  * Handles the logic for loading customers from a CSV file, searching for
- * customers in the list, and creating new customers from the Add Customer form.
+ * customers in the list, and creating or updating customers from the
+ * Add and Update Customer forms.
  *
  * @author Hansel
  */
@@ -178,6 +179,18 @@ public class CustomerListControl {
         customer.setWebsite(data.get(10));
 
         return true;
+    }
+
+    /**
+     * Opens the Update Customer form as a modal dialog over the given customer
+     * list window, preloaded with the selected customer's data.
+     *
+     * @param view the customer list window that owns the new form
+     * @param customer the customer to edit
+     */
+    public void onUpdateCustomer(CustomerListView view, CustomerModel customer) {
+        UpdateFormView form = new UpdateFormView(view, this, customer);
+        form.setVisible(true);
     }
 
 }

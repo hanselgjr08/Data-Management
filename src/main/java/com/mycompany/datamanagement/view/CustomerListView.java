@@ -97,7 +97,7 @@ public class CustomerListView extends JFrame {
         updateButton.addActionListener(e -> {
             int row = table.getSelectedRow();
             CustomerModel selected = customerListModel.getCustomerList().get(row);
-            new UpdateFormView(this, customerListControl, selected).setVisible(true);
+            customerListControl.onUpdateCustomer(this, selected);
         });
 
         southPanel.add(addPanel, BorderLayout.CENTER);
