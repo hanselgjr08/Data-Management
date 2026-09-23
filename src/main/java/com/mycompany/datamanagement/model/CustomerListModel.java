@@ -37,54 +37,21 @@ public class CustomerListModel {
     }
 
     /**
-     * Searches for customers whose first name matches the given name
-     * (case-insensitive).
+     * Searches for customers matching a name and/or a country. A blank
+     * parameter is ignored, so it matches every customer for that criterion.
      *
-     * @param name the first name to search for
-     * @return a list with every matching customer (empty if none is found)
+     * @param name the first name to search for, or blank to ignore this
+     * criterion
+     * @param country the country to search for, or blank to ignore this
+     * criterion
+     * @return a list with every customer matching both non-blank criteria
      */
-    public ArrayList<CustomerModel> searchByName(String name) {
+    public ArrayList<CustomerModel> search(String name, String country) {
         ArrayList<CustomerModel> coincidences = new ArrayList<>();
         for (CustomerModel c : customerList) {
-            if (c.getFirstName().equalsIgnoreCase(name)) {
-                coincidences.add(c);
-            }
-        }
-        return coincidences;
-    }
-
-    /**
-     * Searches for all customers belonging to a specific country
-     * (case-insensitive).
-     *
-     * @param country the country to search for
-     * @return a list with every matching customer (empty if none is found)
-     */
-    public ArrayList<CustomerModel> searchByCountry(String country) {
-        ArrayList<CustomerModel> coincidences = new ArrayList<>();
-        for (CustomerModel c : customerList) {
-            if (c.getCountry().equalsIgnoreCase(country)) {
-                coincidences.add(c);
-            }
-        }
-        return coincidences;
-    }
-
-    /**
-     * Compares the results of a name search and a country search, keeping only
-     * the customers that appear in both lists.
-     *
-     * @param byName the results from searchByName
-     * @param byCountry the results from searchByCountry
-     * @return a list with only the customers that satisfy both conditions
-     */
-    public ArrayList<CustomerModel> search(
-            ArrayList<CustomerModel> byName,
-            ArrayList<CustomerModel> byCountry) {
-
-        ArrayList<CustomerModel> coincidences = new ArrayList<>();
-        for (CustomerModel c : byName) {
-            if (byCountry.contains(c)) {
+            boolean nameOk = name.isBlank() || c.getFirstName().equalsIgnoreCase(name);
+            boolean countryOk = country.isBlank() || c.getCountry().equalsIgnoreCase(country);
+            if (nameOk && countryOk) {
                 coincidences.add(c);
             }
         }

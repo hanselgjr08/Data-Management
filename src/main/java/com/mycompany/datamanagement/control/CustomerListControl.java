@@ -77,17 +77,17 @@ public class CustomerListControl {
     }
 
     /**
-     * Searches for customers matching both a name and a country, delegating the
+     * Searches for customers matching a name and/or a country, delegating the
      * actual search logic to the model.
      *
-     * @param name the first name to search for
-     * @param country the country to search for
+     * @param name the first name to search for, or blank to ignore this
+     * criterion
+     * @param country the country to search for, or blank to ignore this
+     * criterion
      * @return a list with the customers matching both criteria
      */
     public ArrayList<CustomerModel> search(String name, String country) {
-        ArrayList<CustomerModel> byName = customerListModel.searchByName(name);
-        ArrayList<CustomerModel> byCountry = customerListModel.searchByCountry(country);
-        return customerListModel.search(byName, byCountry);
+        return customerListModel.search(name, country);
     }
 
     /**
