@@ -24,6 +24,8 @@ public class CustomerListView extends JFrame {
     private JButton searchButton;
     private JButton addButton;
     private JButton refreshButton;
+    private JButton updateButton;
+    private JButton deleteButton;
 
     /**
      * Creates the customer list window linked to the given model and controller,
@@ -49,28 +51,15 @@ public class CustomerListView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        
-        JPanel northPanel = new JPanel(new BorderLayout());
-        
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10 ));
-        addButton = new JButton("Add Customer");
-        
-        addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
-        
-        southPanel.add(addButton);
-        
-        JPanel refreshPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        refreshButton = new JButton("Refresh");
-        
-        refreshButton.addActionListener(e -> listCustomers());
 
-        refreshPanel.add(refreshButton);
-        
+        // northPanel =========================================================
+        JPanel northPanel = new JPanel(new BorderLayout());
+
+        // searchPanel---------------------------------------------
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         nameField = new JTextField(10);
         countryField = new JTextField(10);
         searchButton = new JButton("Search");
-
         searchButton.addActionListener(e -> search());
 
         searchPanel.add(new JLabel("Name:"));
@@ -78,10 +67,45 @@ public class CustomerListView extends JFrame {
         searchPanel.add(new JLabel("Country:"));
         searchPanel.add(countryField);
         searchPanel.add(searchButton);
-        
+
+        //refreshPanel----------------------------------------------
+        JPanel refreshPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        refreshButton = new JButton("Refresh");
+        refreshButton.addActionListener(e -> listCustomers());
+        refreshPanel.add(refreshButton);
+
         northPanel.add(searchPanel, BorderLayout.CENTER);
         northPanel.add(refreshPanel, BorderLayout.EAST);
-
+        add(northPanel, BorderLayout.NORTH);
+        
+        // new southPanel _=_==_=_=_=_=_=_=_=__=_=_==_=__=_=
+        JPanel southPanel = new JPanel(new BorderLayout());
+        
+        JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        addButton = new JButton("Add Customer");
+        addPanel.add(addButton);
+        addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
+        
+        JPanel recordActionsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        updateButton = new JButton("Update");
+        deleteButton = new JButton("Delete");
+        recordActionsPanel.add(updateButton);
+        recordActionsPanel.add(deleteButton);
+        updateButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+        
+        southPanel.add(addPanel, BorderLayout.CENTER);
+        southPanel.add(recordActionsPanel, BorderLayout.EAST);
+        add(southPanel, BorderLayout.SOUTH);
+        
+        /* southPanel =========================================================
+        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        addButton = new JButton("Add Customer");
+        addButton.addActionListener(e -> customerListControl.onAddCustomer(this));
+        southPanel.add(addButton);
+        add(southPanel, BorderLayout.SOUTH);
+        */
+        // tabla central
         String[] columns = {
             "Customer ID", "First Name", "Last Name", "Company", "City",
             "Country", "Phone 1", "Phone 2", "Email", "Subscription Date", "Website"
@@ -89,8 +113,15 @@ public class CustomerListView extends JFrame {
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
         
-        add(southPanel, BorderLayout.SOUTH);
-        add(northPanel, BorderLayout.NORTH);
+        table.getSelectionModel().addListSelectionListener(e -> {
+        if (e.getValueIsAdjusting()) {
+            return;
+        }
+        boolean hasSelection = table.getSelectedRow() != -1;
+        updateButton.setEnabled(hasSelection);
+        deleteButton.setEnabled(hasSelection);
+        });
+        
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 
