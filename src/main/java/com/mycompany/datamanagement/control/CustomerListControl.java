@@ -71,6 +71,7 @@ public class CustomerListControl {
      * @throws IOException if the file cannot be read
      */
     public void loadCustomerFromFile(String fileName) throws IOException {
+        customerListModel.clearCustomers();
         ArrayList<String> lines = CSVFileManagerControl.readLine(fileName);
         addCustomerFromCSV(lines);
     }

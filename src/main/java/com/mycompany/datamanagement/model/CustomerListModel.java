@@ -32,6 +32,10 @@ public class CustomerListModel {
         return new ArrayList<>(customerList);
     }
 
+    public void clearCustomers() {
+        customerList.clear();
+    }
+
     /**
      * Searches for customers whose first name matches the given name
      * (case-insensitive).

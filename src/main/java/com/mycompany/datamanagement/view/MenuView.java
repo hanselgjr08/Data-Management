@@ -5,9 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Main menu window with options to load customer data from a CSV file
- * and open the customer list view.
- * 
+ * Main menu window with options to load customer data from a CSV file and open
+ * the customer list view.
+ *
  * @author Hansel
  */
 public class MenuView extends JFrame {
@@ -15,7 +15,7 @@ public class MenuView extends JFrame {
     private MenuControl menuControl;
     private JButton loadButton;
     private JButton listButton;
-    
+
     /**
      * Creates the main menu window linked to the given menu controller.
      *
@@ -44,7 +44,7 @@ public class MenuView extends JFrame {
         loadButton = new JButton("Load CSV");
         listButton = new JButton("List Customers");
 
-        loadButton.addActionListener(e -> menuControl.onLoadCSV());
+        loadButton.addActionListener(e -> menuControl.onOpenLoadCSVForm(this));
         listButton.addActionListener(e -> menuControl.onListCustomers());
 
         buttonPanel.add(loadButton);
