@@ -7,8 +7,8 @@ import com.mycompany.datamanagement.view.*;
 
 /**
  * Handles the logic for loading customers from a CSV file, searching for
- * customers in the list, and creating or updating customers from the
- * Add and Update Customer forms.
+ * customers in the list, and creating or updating customers from the Add and
+ * Update Customer forms.
  *
  * @author Hansel
  */
@@ -191,6 +191,11 @@ public class CustomerListControl {
     public void onUpdateCustomer(CustomerListView view, CustomerModel customer) {
         UpdateFormView form = new UpdateFormView(view, this, customer);
         form.setVisible(true);
+    }
+
+    public void onDeleteCustomer(String customerId) {
+        CustomerModel customer = customerListModel.findById(customerId);
+        customerListModel.removeCustomer(customer);
     }
 
 }

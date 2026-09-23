@@ -100,6 +100,21 @@ public class CustomerListView extends JFrame {
             customerListControl.onUpdateCustomer(this, selected);
         });
 
+        deleteButton.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            CustomerModel selected = customerListModel.getCustomerList().get(row);
+
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this customer?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            customerListControl.onDeleteCustomer(selected.getCustomerId());
+            listCustomers();
+            updateButton.setEnabled(false);
+            deleteButton.setEnabled(false);
+        });
+
         southPanel.add(addPanel, BorderLayout.CENTER);
         southPanel.add(recordActionsPanel, BorderLayout.EAST);
         add(southPanel, BorderLayout.SOUTH);

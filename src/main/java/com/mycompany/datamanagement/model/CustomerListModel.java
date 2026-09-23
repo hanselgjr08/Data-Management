@@ -101,4 +101,8 @@ public class CustomerListModel {
         }
         return null;
     }
+
+    public void removeCustomer(CustomerModel customer) {
+        customerList.remove(customer);
+    }
 }
