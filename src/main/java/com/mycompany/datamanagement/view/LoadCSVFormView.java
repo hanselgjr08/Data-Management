@@ -5,6 +5,8 @@ import javax.swing.*;
 import com.mycompany.datamanagement.control.*;
 
 /**
+ * Modal dialog that lets the user enter the name of a CSV file and load its
+ * customers into the customer list model.
  *
  * @author Hansel
  */
@@ -15,12 +17,23 @@ public class LoadCSVFormView extends JDialog {
     private JButton cancelButton;
     private MenuControl menuControl;
 
+    /**
+     * Creates the Load CSV form as a modal dialog owned by the given menu
+     * window.
+     *
+     * @param owner the window that opens this form
+     * @param menuControl the controller used to load the CSV file
+     */
     public LoadCSVFormView(MenuView owner, MenuControl menuControl) {
         super(owner, "Load CSV", true);
         this.menuControl = menuControl;
         initComponents();
     }
 
+    /**
+     * Builds and arranges the form's visual components: the file name field,
+     * and the Load and Cancel buttons.
+     */
     private void initComponents() {
         setLayout(new BorderLayout(10, 10));
 

@@ -44,7 +44,7 @@ public class MenuView extends JFrame {
         loadButton = new JButton("Load CSV");
         listButton = new JButton("List Customers");
 
-        loadButton.addActionListener(e -> menuControl.onOpenLoadCSVForm(this));
+        loadButton.addActionListener(e -> menuControl.onOpenLoadCSVForm(this)); //Explicacion tecnica
         listButton.addActionListener(e -> menuControl.onListCustomers());
 
         buttonPanel.add(loadButton);

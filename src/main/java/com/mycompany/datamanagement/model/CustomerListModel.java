@@ -32,6 +32,9 @@ public class CustomerListModel {
         return new ArrayList<>(customerList);
     }
 
+    /**
+     * Removes every customer from the list, leaving it empty.
+     */
     public void clearCustomers() {
         customerList.clear();
     }
@@ -73,6 +76,11 @@ public class CustomerListModel {
         return null;
     }
 
+    /**
+     * Removes the given customer from the list.
+     *
+     * @param customer the customer to remove
+     */
     public void removeCustomer(CustomerModel customer) {
         customerList.remove(customer);
     }

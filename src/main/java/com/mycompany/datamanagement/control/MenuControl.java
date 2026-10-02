@@ -30,8 +30,13 @@ public class MenuControl {
     }
 
     /**
-     * Loads the customers from the default CSV file and shows a confirmation or
+     * Loads the customers from the given CSV file and shows a confirmation or
      * error message depending on the result.
+     *
+     * @param fileName the name of the CSV file (without extension), located in
+     * the inputfiles folder
+     * @return true if the file was loaded successfully, false if an error
+     * occurred while reading it
      */
     public boolean onLoadCSV(String fileName) {
         try {
@@ -44,6 +49,11 @@ public class MenuControl {
         }
     }
 
+    /**
+     * Opens the Load CSV form as a modal dialog over the given menu window.
+     *
+     * @param view the menu window that owns the new form
+     */
     public void onOpenLoadCSVForm(MenuView view) {
         LoadCSVFormView form = new LoadCSVFormView(view, this);
         form.setVisible(true);

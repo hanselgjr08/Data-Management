@@ -42,8 +42,9 @@ public class CustomerListView extends JFrame {
     }
 
     /**
-     * Builds and arranges the window's visual components: the search panel, the
-     * Add Customer and Refresh buttons, and the customer table.
+     * Builds and arranges the window's visual components: the search panel,
+     * the Add Customer, Refresh, Update and Delete buttons, and the customer
+     * table.
      */
     private void initComponents() {
         setTitle("Customer List");

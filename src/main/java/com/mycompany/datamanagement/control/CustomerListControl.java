@@ -194,6 +194,12 @@ public class CustomerListControl {
         form.setVisible(true);
     }
 
+    /**
+     * Finds the customer with the given ID and removes it from the customer
+     * list model.
+     *
+     * @param customerId the ID of the customer to delete
+     */
     public void onDeleteCustomer(String customerId) {
         CustomerModel customer = customerListModel.findById(customerId);
         customerListModel.removeCustomer(customer);
